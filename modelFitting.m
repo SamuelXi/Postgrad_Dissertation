@@ -158,7 +158,7 @@ file = fopen(filePathR, 'w');
 
 % Write the header line to the file
 % Parameter set  = [a Ter eta z sz st v (pi) (gamma)]
-fprintf(file, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+fprintf(file, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v(101),a(102),Ter(102),eta(102),z(102),sz(102),st(102),v(102)\n');
 
  for i = 1:numel(files)
      % create the data matrix [conditions, response, rt in seconds]
