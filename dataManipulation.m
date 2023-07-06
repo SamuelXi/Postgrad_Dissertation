@@ -1,7 +1,7 @@
 %% Extracting data from the file
 clc, clearvars
 %folder path of the individual data
-folderPath = '/Users/samuelxisun/Desktop/Experiment/individual_data_paper';
+folderPath = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/individual_data_paper';
 
 % List all .csv file under the individual_data_paper folder
 % should be 115 participants
@@ -10,7 +10,7 @@ files = dir(fullfile(folderPath, '*.csv'));
 % All partitcipants file, 115*148*3
 allParticipants = zeros(numel(files),148, 3)
 
-%displat all file contents
+%display all file contents
 for i = 1:numel(files)
     filePath = fullfile(folderPath, files(i).name);
     % Read the file
@@ -24,10 +24,13 @@ for i = 1:numel(files)
     %set individual input data matrix
     inputIndData = zeros(numRows,3);
     
-    %extract data from each file
-    %1st column condition, 2nd column response type, 3rd column rt
-    inputIndData(:,1) = fileData.gamble;
-    inputIndData(:,2) = fileData.win;
+    % extract data from each file
+    % 1st column condition (trial type (need to alter later for different
+    % fit test)
+    % 2nd column response type (win/lose)
+    % 3rd column rt
+    inputIndData(:,1) = fileData.trial_type;
+    inputIndData(:,2) = fileData.gamble;
     inputIndData(:,3) = fileData.rt / 1000; % reaction time have to be in sec
 
     % condition = inputIndData(:,1) == -999.000;
@@ -37,8 +40,8 @@ for i = 1:numel(files)
 
     %append individual data to the all data matrix
     allParticipants(i,:,:) = inputIndData;
-    disp(allParticipants)
 end
+    disp(allParticipants)
 
 
 %% Deal with NaN situation
