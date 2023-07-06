@@ -8,7 +8,7 @@ folderPath = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/individual_data_p
 files = dir(fullfile(folderPath, '*.csv'));
 
 % All partitcipants file, 115*148*3
-allParticipants = zeros(numel(files),148, 3)
+allParticipants = zeros(numel(files),148, 3);
 
 %display all file contents
 for i = 1:numel(files)
