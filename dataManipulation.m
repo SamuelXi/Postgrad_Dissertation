@@ -51,16 +51,16 @@ end
 
 %% clean up data that participants exceed the time
 %remove all -999, by replacing the rt from NaN to 0
-allparticipantsClean = [];
-for j = 1:numel(files)
-    for k = 1:numRows
-        if allParticipants(j,k,1) ~= -999;
-            allParticipantsClean(j,k,:) = allParticipants(j, k, :);
-        else
-            disp(j)
-        end 
-    end
-end
+% allparticipantsClean = [];
+% for j = 1:numel(files)
+%     for k = 1:numRows
+%         if allParticipants(j,k,1) ~= -999;
+%             allParticipantsClean(j,k,:) = allParticipants(j, k, :);
+%         else
+%             disp(j)
+%         end 
+%     end
+% end
 
 %% Calculating avg
 %create a 115*1 matrix to store each participants avg reaction time
