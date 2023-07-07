@@ -95,10 +95,7 @@ fprintf(file5, 'participantsID,a,Ter,eta,z,sz,st,v\n');
      qtable(output);
  end
 
-%% Run all 5 models (Condition) 
-% Something worng with model 4 when running all models all together, need
-% to run the model one by one for the condition model, changing parameter
-% in output and save file to the corresponding file.
+%% Run all 5 models (Condition)
 
 % Open the file for writing
 folderPathCon = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/fitting_results/DMAT/Condition/';
