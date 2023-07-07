@@ -1,3 +1,34 @@
+%% initialise file name
+
+
+% No condition 
+folderPathNoCon = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/fitting_results/DMAT/NoCondition/';
+fileNameNoConR1 = 'model1(noCondition).csv';
+fileNameNoConR2 = 'model2(noCondition).csv';
+fileNameNoConR3 = 'model3(noCondition).csv';
+fileNameNoConR4 = 'model4(noCondition).csv';
+fileNameNoConR5 = 'model5(noCondition).csv';
+
+filePathNoConR1 = fullfile(folderPathNoCon,fileNameNoConR1);
+filePathNoConR2 = fullfile(folderPathNoCon,fileNameNoConR2);
+filePathNoConR3 = fullfile(folderPathNoCon,fileNameNoConR3);
+filePathNoConR4 = fullfile(folderPathNoCon,fileNameNoConR4);
+filePathNoConR5 = fullfile(folderPathNoCon,fileNameNoConR5);
+
+% Condition
+folderPathCon = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/fitting_results/DMAT/Condition/';
+fileNameConR1 = 'model1(Condition).csv';
+fileNameConR2 = 'model2(Condition).csv';
+fileNameConR3 = 'model3(Condition).csv';
+fileNameConR4 = 'model4(Condition).csv';
+fileNameConR5 = 'model5(Condition).csv';
+
+filePathConR1 = fullfile(folderPathCon,fileNameConR1);
+filePathConR2 = fullfile(folderPathCon,fileNameConR2);
+filePathConR3 = fullfile(folderPathCon,fileNameConR3);
+filePathConR4 = fullfile(folderPathCon,fileNameConR4);
+filePathConR5 = fullfile(folderPathCon,fileNameConR5);
+
 %% Initialised the DMAT toolbox
  opts = multiestv4;
  opts = repmat(opts,5,1);  
@@ -33,7 +64,6 @@
  %set individual input testing data matrix
  opts(5).FitBNotZ = 1;
  opts(5).Name = 'Model 5: No effect, all parameters are free';
-
 %% Run all 5 models (No Condition)
 
 % Open the file for writing

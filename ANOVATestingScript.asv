@@ -56,6 +56,7 @@ for i = 1:115
         vAnxG2 = [vAnxG2,con5(i,:).v_101_];
     end
 end
+disp(vAnxG2)
 
 
 [h1, p1, ci1, stats1] = ttest2(vNoAnxG1,vAnxG1);
@@ -66,8 +67,8 @@ fprintf('___________No Conditioned t-test___________\n');
 fprintf('t-statistic: %.4f\n', stats1.tstat);
 fprintf('p-value: %.4f\n', p1);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci1(1), ci1(2));
-fprintf('\n')
-fprintf('____________Conditioned t-test_____________\n');
+
+fprintf('___________Conditioned t-test___________\n');
 fprintf('t-statistic: %.4f\n', stats2.tstat);
 fprintf('p-value: %.4f\n', p2);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci2(1), ci2(2));

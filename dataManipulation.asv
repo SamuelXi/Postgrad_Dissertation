@@ -61,7 +61,7 @@ end
 %     end
 % end
 
-%% Calculating avg (only for testing)
+%% Calculating avg
 %create a 115*1 matrix to store each participants avg reaction time
 rtAvg = zeros(115,1)
 for i = 1:numel(files)
@@ -75,16 +75,12 @@ end
 anxPar = [];
 anxNoPar = [];
 
-% File path
+%filepat
 gad7file = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/data/data_anx_gad7_prior.csv';
 gad7 = readtable(gad7file);
-
-% Get column
 parID = gad7.id;
 anxIndex = num2cell(gad7.gad7);
 gadInfo = [parID anxIndex];
-
-% Append pariticipant ID based on GAD
 for i = 1:115
     if cell2mat(gadInfo(i,2)) <= 7
         anxNoPar = [anxNoPar, gadInfo(i,1)];
