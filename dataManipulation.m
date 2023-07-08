@@ -11,7 +11,8 @@ files = dir(fullfile(folderPath, '*.csv'));
 
 % All partitcipants file, 115*148*3
 allParticipants = zeros(numel(files),148, 3);
-
+allParticipants101 = zeros(numel(files),98,3);
+allParticipants102 = zeros(numel(files),50,3);
 
 %display all file contents
 for i = 1:numel(files)
@@ -26,6 +27,8 @@ for i = 1:numel(files)
 
     %set individual input data matrix
     inputIndData = zeros(numRows,3);
+    inputIndData101 = zeros(98,3);
+    inputIndData102 = zeros(50,3);
     
     % extract data from each file
     % 1st column condition (trial type (need to alter later for different
@@ -35,13 +38,31 @@ for i = 1:numel(files)
     inputIndData(:,1) = fileData.trial_type;
     inputIndData(:,2) = fileData.gamble;
     inputIndData(:,3) = fileData.rt / 1000; % reaction time have to be in sec
+    % Check for trial type for later testing
+    trialTemp = fileData.trial_type;
+    gambleTemp = fileData.gamble;
+    rtTemp = fileData.rt / 1000;
+    count101 = 0;
+    count102 = 0;
+    for j = 1:148
+        if trialTemp(j) == 101
+            count101 = count101 + 1;
+            inputIndData101(count101,1) = trialTemp(j);
+            inputIndData101(count101,2) = gambleTemp(j);
+            inputIndData101(count101,3) = rtTemp(j);
+        else
+            count102 = count102 + 1;
+            inputIndData102(count102,1) = trialTemp(j);
+            inputIndData102(count102,2) = gambleTemp(j);
+            inputIndData102(count102,3) = rtTemp(j);
+        end 
+    end
 
     %append individual data to the all data matrix
     allParticipants(i,:,:) = inputIndData;
+    allParticipants101(i,:,:) = inputIndData101;
+    allParticipants102(i,:,:) = inputIndData102;
 end
-    % disp(allParticipants)
-
-
 
 %% Deal with NaN situation
 %ignoring the function by using omitmissing in mean function
@@ -92,5 +113,4 @@ for i = 1:115
         anxPar = [anxPar, gadInfo(i,1)];
     end
 end
-
 
