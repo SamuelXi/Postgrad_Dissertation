@@ -11,8 +11,33 @@ con2 = readtable(filePathConR2);
 con3 = readtable(filePathConR3);
 con4 = readtable(filePathConR4);
 con5 = readtable(filePathConR5);
-ConSep5_101 = readtable(filePathConR5_101);
-ConSep5_102 = readtable(filePathConR5_102);
+
+%% Compare and select winning model
+% For one Condition
+noConSumAICc1 = sum(noCon1.AICc(1));
+noConSumAICc2 = sum(noCon2.AICc(2));
+noConSumAICc3 = sum(noCon3.AICc(3));
+noConSumAICc4 = sum(noCon4.AICc(4));
+noConSumAICc5 = sum(noCon5.AICc(5));
+
+noConSumBIC1 = sum(noCon1.BIC(1));
+noConSumBIC2 = sum(noCon2.BIC(2));
+noConSumBIC3 = sum(noCon3.BIC(3));
+noConSumBIC4 = sum(noCon4.BIC(4));
+noConSumBIC5 = sum(noCon5.BIC(5));
+
+ConSumAICc1 = sum(con1.AICc(1));
+ConSumAICc2 = sum(con2.AICc(2));
+ConSumAICc3 = sum(con3.AICc(3));
+ConSumAICc4 = sum(con4.AICc(4));
+ConSumAICc5 = sum(con5.AICc(5));
+
+ConSumBIC1 = sum(con1.BIC(1));
+ConSumBIC2 = sum(con2.BIC(2));
+ConSumBIC3 = sum(con3.BIC(3));
+ConSumBIC4 = sum(con4.BIC(4));
+ConSumBIC5 = sum(con5.BIC(5));
+
 
 
 %% Parameters setup
@@ -111,7 +136,7 @@ st_Sep_102 = ConSep5_102(:,:).st;
 eta_Sep_102 = ConSep5_102(:,:).eta;
 
 
-%% Comparing between anxious and non annxious group in all parameter values
+%% Comparing between anxious and non annxious group for all parameter values
 % % Group size
 % anxSize = size(anxPar);
 % anxNoSize = size(anxNoPar);
@@ -257,103 +282,127 @@ for i = 1:115
 end
 
 
-%% T-test setup
+%% T-test（One condition)
+
 % v parameter
 [h1, p1, ci1, stats1] = ttest2(vNoAnxG1,vAnxG1); %no Condition
+% a parameter
+[h3, p3, ci3, stats3] = ttest2(aNoAnxG1,aAnxG1); %no Condition
+% z parameter
+[h5, p5, ci5, stats5] = ttest2(zNoAnxG1,zAnxG1); %no Condition
+% Ter parameter
+[h7, p7, ci7, stats7] = ttest2(TerNoAnxG1,TerAnxG1); %no Condition
+% sz parameter
+[h9, p9, ci9, stats9] = ttest2(szNoAnxG1,szAnxG1); %no Condition
+% st parameter
+[h11, p11, ci11, stats11] = ttest2(stNoAnxG1,stAnxG1); %no Condition
+% eta parameter
+[h13, p13, ci13, stats13] = ttest2(etaNoAnxG1,etaAnxG1); %no Condition
+
+fprintf('_____________One Condition v t-test_____________\n');
+fprintf('t-statistic: %.4f\n', stats1.tstat);
+fprintf('p-value: %.4f\n', p1);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci1(1), ci1(2));
+fprintf('\n')
+
+fprintf('_____________One Condition a t-test_____________\n');
+fprintf('t-statistic: %.4f\n', stats3.tstat);
+fprintf('p-value: %.4f\n', p3);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci3(1), ci3(2));
+fprintf('\n')
+
+fprintf('_____________One Condition z t-test_____________\n');
+fprintf('t-statistic: %.4f\n', stats5.tstat);
+fprintf('p-value: %.4f\n', p5);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci5(1), ci5(2));
+fprintf('\n')
+
+fprintf('____________One Condition Ter t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats7.tstat);
+fprintf('p-value: %.4f\n', p7);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci7(1), ci7(2));
+fprintf('\n')
+
+fprintf('____________One Condition sz t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats9.tstat);
+fprintf('p-value: %.4f\n', p9);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci9(1), ci9(2));
+fprintf('\n')
+
+fprintf('____________One Condition st t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats11.tstat);
+fprintf('p-value: %.4f\n', p11);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci11(1), ci11(2));
+fprintf('\n')
+
+fprintf('____________One Condition eta t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats13.tstat);
+fprintf('p-value: %.4f\n', p13);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci13(1), ci13(2));
+fprintf('\n')
+%% Two conditioned
+% 101 vs 102 (No seperatio
+% v parameter
 [h2, p2, ci2, stats2] = ttest2(vNoAnxG2,vAnxG2); %Condition
 
 % a parameter
-[h3, p3, ci3, stats3] = ttest2(aNoAnxG1,aAnxG1); %no Condition
 [h4, p4, ci4, stats4] = ttest2(aNoAnxG2,aAnxG2); %Condition
 
 % z parameter
-[h5, p5, ci5, stats5] = ttest2(zNoAnxG1,zAnxG1); %no Condition
 [h6, p6, ci6, stats6] = ttest2(zNoAnxG2,zAnxG2); %Condition
 
 % Ter parameter
-[h7, p7, ci7, stats7] = ttest2(TerNoAnxG1,TerAnxG1); %no Condition
 [h8, p8, ci8, stats8] = ttest2(TerNoAnxG2,TerAnxG2); %Condition
 
 % sz parameter
-[h9, p9, ci9, stats9] = ttest2(szNoAnxG1,szAnxG1); %no Condition
 [h10, p10, ci10, stats10] = ttest2(szNoAnxG2,szAnxG2); %Condition
 
 % st parameter
-[h11, p11, ci11, stats11] = ttest2(stNoAnxG1,stAnxG1); %no Condition
 [h12, p12, ci12, stats12] = ttest2(stNoAnxG2,stAnxG2); %Condition
 
 % eta parameter
-[h13, p13, ci13, stats13] = ttest2(etaNoAnxG1,etaAnxG1); %no Condition
 [h14, p14, ci14, stats14] = ttest2(etaNoAnxG2,etaAnxG2); %Condition
 
 
 
 % Display the results
-fprintf('_____________No Condition v t-test_____________\n');
-fprintf('t-statistic: %.4f\n', stats1.tstat);
-fprintf('p-value: %.4f\n', p1);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci1(1), ci1(2));
-fprintf('\n')
+
 fprintf('______________Condition v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats2.tstat);
 fprintf('p-value: %.4f\n', p2);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci2(1), ci2(2));
 fprintf("\n");
-fprintf('_____________No Condition a t-test_____________\n');
-fprintf('t-statistic: %.4f\n', stats3.tstat);
-fprintf('p-value: %.4f\n', p3);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci3(1), ci3(2));
-fprintf('\n')
+
 fprintf('______________Condition a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats4.tstat);
 fprintf('p-value: %.4f\n', p4);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci4(1), ci4(2));
 fprintf("\n");
-fprintf('_____________No Condition z t-test_____________\n');
-fprintf('t-statistic: %.4f\n', stats5.tstat);
-fprintf('p-value: %.4f\n', p5);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci5(1), ci5(2));
-fprintf('\n')
+
 fprintf('______________Condition z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats6.tstat);
 fprintf('p-value: %.4f\n', p6);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci6(1), ci6(2));
 fprintf("\n");
-fprintf('____________No Condition Ter t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats7.tstat);
-fprintf('p-value: %.4f\n', p7);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci7(1), ci7(2));
-fprintf('\n')
+
 fprintf('_____________Condition Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats8.tstat);
 fprintf('p-value: %.4f\n', p8);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci8(1), ci8(2));
 fprintf("\n");
-fprintf('____________No Condition sz t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats9.tstat);
-fprintf('p-value: %.4f\n', p9);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci9(1), ci9(2));
-fprintf('\n')
+
 fprintf('_____________Condition sz t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats10.tstat);
 fprintf('p-value: %.4f\n', p10);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci10(1), ci10(2));
 fprintf("\n");
-fprintf('____________No Condition st t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats11.tstat);
-fprintf('p-value: %.4f\n', p11);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci11(1), ci11(2));
-fprintf('\n')
+
 fprintf('_____________Condition st t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats12.tstat);
 fprintf('p-value: %.4f\n', p12);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci12(1), ci12(2));
 fprintf("\n");
-fprintf('____________No Condition eta t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats13.tstat);
-fprintf('p-value: %.4f\n', p13);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci13(1), ci13(2));
-fprintf('\n')
+
 fprintf('_____________Condition eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats14.tstat);
 fprintf('p-value: %.4f\n', p14);

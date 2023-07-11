@@ -11,8 +11,33 @@ con2 = readtable(filePathConR2);
 con3 = readtable(filePathConR3);
 con4 = readtable(filePathConR4);
 con5 = readtable(filePathConR5);
-ConSep5_101 = readtable(filePathConR5_101);
-ConSep5_102 = readtable(filePathConR5_102);
+
+%% Compare and select winning model
+% For one Condition
+noConSumAICc1 = sum(noCon1.AICc(1));
+noConSumAICc2 = sum(noCon2.AICc(2));
+noConSumAICc3 = sum(noCon3.AICc(3));
+noConSumAICc4 = sum(noCon4.AICc(4));
+noConSumAICc5 = sum(noCon5.AICc(5));
+
+noConSumBIC1 = sum(noCon1.BIC(1));
+noConSumBIC2 = sum(noCon2.BIC(2));
+noConSumBIC3 = sum(noCon3.BIC(3));
+noConSumBIC4 = sum(noCon4.BIC(4));
+noConSumBIC5 = sum(noCon5.BIC(5));
+
+ConSumAICc1 = sum(con1.AICc(1));
+ConSumAICc2 = sum(con2.AICc(2));
+ConSumAICc3 = sum(con3.AICc(3));
+ConSumAICc4 = sum(con4.AICc(4));
+ConSumAICc5 = sum(con5.AICc(5));
+
+ConSumBIC1 = sum(con1.BIC(1));
+ConSumBIC2 = sum(con2.BIC(2));
+ConSumBIC3 = sum(con3.BIC(3));
+ConSumBIC4 = sum(con4.BIC(4));
+ConSumBIC5 = sum(con5.BIC(5));
+
 
 
 %% Parameters setup
@@ -48,7 +73,7 @@ stAnxG2 = [];
 etaNoAnxG2 = [];
 etaAnxG2 = [];
 
-% Condition for Seperation
+% Condition for Separation
 vNoAnxG2_Sep_101 = [];
 vAnxG2_Sep_101 = [];
 aNoAnxG2_Sep_101 = [];
@@ -111,7 +136,7 @@ st_Sep_102 = ConSep5_102(:,:).st;
 eta_Sep_102 = ConSep5_102(:,:).eta;
 
 
-%% Comparing between anxious and non annxious group in all parameter values
+%% Comparing between anxious and non annxious group for all parameter values
 % % Group size
 % anxSize = size(anxPar);
 % anxNoSize = size(anxNoPar);
@@ -257,103 +282,127 @@ for i = 1:115
 end
 
 
-%% T-test setup
+%% T-test（One condition)
+
 % v parameter
 [h1, p1, ci1, stats1] = ttest2(vNoAnxG1,vAnxG1); %no Condition
+% a parameter
+[h3, p3, ci3, stats3] = ttest2(aNoAnxG1,aAnxG1); %no Condition
+% z parameter
+[h5, p5, ci5, stats5] = ttest2(zNoAnxG1,zAnxG1); %no Condition
+% Ter parameter
+[h7, p7, ci7, stats7] = ttest2(TerNoAnxG1,TerAnxG1); %no Condition
+% sz parameter
+[h9, p9, ci9, stats9] = ttest2(szNoAnxG1,szAnxG1); %no Condition
+% st parameter
+[h11, p11, ci11, stats11] = ttest2(stNoAnxG1,stAnxG1); %no Condition
+% eta parameter
+[h13, p13, ci13, stats13] = ttest2(etaNoAnxG1,etaAnxG1); %no Condition
+
+fprintf('_____________One Condition v t-test_____________\n');
+fprintf('t-statistic: %.4f\n', stats1.tstat);
+fprintf('p-value: %.4f\n', p1);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci1(1), ci1(2));
+fprintf('\n')
+
+fprintf('_____________One Condition a t-test_____________\n');
+fprintf('t-statistic: %.4f\n', stats3.tstat);
+fprintf('p-value: %.4f\n', p3);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci3(1), ci3(2));
+fprintf('\n')
+
+fprintf('_____________One Condition z t-test_____________\n');
+fprintf('t-statistic: %.4f\n', stats5.tstat);
+fprintf('p-value: %.4f\n', p5);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci5(1), ci5(2));
+fprintf('\n')
+
+fprintf('____________One Condition Ter t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats7.tstat);
+fprintf('p-value: %.4f\n', p7);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci7(1), ci7(2));
+fprintf('\n')
+
+fprintf('____________One Condition sz t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats9.tstat);
+fprintf('p-value: %.4f\n', p9);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci9(1), ci9(2));
+fprintf('\n')
+
+fprintf('____________One Condition st t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats11.tstat);
+fprintf('p-value: %.4f\n', p11);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci11(1), ci11(2));
+fprintf('\n')
+
+fprintf('____________One Condition eta t-test____________\n');
+fprintf('t-statistic: %.4f\n', stats13.tstat);
+fprintf('p-value: %.4f\n', p13);
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci13(1), ci13(2));
+fprintf('\n')
+%% Two conditioned
+% 101 vs 102 (No seperatio
+% v parameter
 [h2, p2, ci2, stats2] = ttest2(vNoAnxG2,vAnxG2); %Condition
 
 % a parameter
-[h3, p3, ci3, stats3] = ttest2(aNoAnxG1,aAnxG1); %no Condition
 [h4, p4, ci4, stats4] = ttest2(aNoAnxG2,aAnxG2); %Condition
 
 % z parameter
-[h5, p5, ci5, stats5] = ttest2(zNoAnxG1,zAnxG1); %no Condition
 [h6, p6, ci6, stats6] = ttest2(zNoAnxG2,zAnxG2); %Condition
 
 % Ter parameter
-[h7, p7, ci7, stats7] = ttest2(TerNoAnxG1,TerAnxG1); %no Condition
 [h8, p8, ci8, stats8] = ttest2(TerNoAnxG2,TerAnxG2); %Condition
 
 % sz parameter
-[h9, p9, ci9, stats9] = ttest2(szNoAnxG1,szAnxG1); %no Condition
 [h10, p10, ci10, stats10] = ttest2(szNoAnxG2,szAnxG2); %Condition
 
 % st parameter
-[h11, p11, ci11, stats11] = ttest2(stNoAnxG1,stAnxG1); %no Condition
 [h12, p12, ci12, stats12] = ttest2(stNoAnxG2,stAnxG2); %Condition
 
 % eta parameter
-[h13, p13, ci13, stats13] = ttest2(etaNoAnxG1,etaAnxG1); %no Condition
 [h14, p14, ci14, stats14] = ttest2(etaNoAnxG2,etaAnxG2); %Condition
 
 
 
 % Display the results
-fprintf('_____________No Condition v t-test_____________\n');
-fprintf('t-statistic: %.4f\n', stats1.tstat);
-fprintf('p-value: %.4f\n', p1);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci1(1), ci1(2));
-fprintf('\n')
+
 fprintf('______________Condition v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats2.tstat);
 fprintf('p-value: %.4f\n', p2);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci2(1), ci2(2));
 fprintf("\n");
-fprintf('_____________No Condition a t-test_____________\n');
-fprintf('t-statistic: %.4f\n', stats3.tstat);
-fprintf('p-value: %.4f\n', p3);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci3(1), ci3(2));
-fprintf('\n')
+
 fprintf('______________Condition a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats4.tstat);
 fprintf('p-value: %.4f\n', p4);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci4(1), ci4(2));
 fprintf("\n");
-fprintf('_____________No Condition z t-test_____________\n');
-fprintf('t-statistic: %.4f\n', stats5.tstat);
-fprintf('p-value: %.4f\n', p5);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci5(1), ci5(2));
-fprintf('\n')
+
 fprintf('______________Condition z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats6.tstat);
 fprintf('p-value: %.4f\n', p6);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci6(1), ci6(2));
 fprintf("\n");
-fprintf('____________No Condition Ter t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats7.tstat);
-fprintf('p-value: %.4f\n', p7);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci7(1), ci7(2));
-fprintf('\n')
+
 fprintf('_____________Condition Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats8.tstat);
 fprintf('p-value: %.4f\n', p8);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci8(1), ci8(2));
 fprintf("\n");
-fprintf('____________No Condition sz t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats9.tstat);
-fprintf('p-value: %.4f\n', p9);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci9(1), ci9(2));
-fprintf('\n')
+
 fprintf('_____________Condition sz t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats10.tstat);
 fprintf('p-value: %.4f\n', p10);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci10(1), ci10(2));
 fprintf("\n");
-fprintf('____________No Condition st t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats11.tstat);
-fprintf('p-value: %.4f\n', p11);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci11(1), ci11(2));
-fprintf('\n')
+
 fprintf('_____________Condition st t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats12.tstat);
 fprintf('p-value: %.4f\n', p12);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci12(1), ci12(2));
 fprintf("\n");
-fprintf('____________No Condition eta t-test____________\n');
-fprintf('t-statistic: %.4f\n', stats13.tstat);
-fprintf('p-value: %.4f\n', p13);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci13(1), ci13(2));
-fprintf('\n')
+
 fprintf('_____________Condition eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats14.tstat);
 fprintf('p-value: %.4f\n', p14);
@@ -382,38 +431,38 @@ fprintf("\n");
 
 % eta parameter
 [h21, p21, ci21, stats21] = ttest2(eta_Sep_101,eta_Sep_102); 
-fprintf('')
-fprintf('______________Condition(Seperate fitting) v t-test_______________\n');
+fprintf('Compare 101 and 102 for all value\n')
+fprintf('______________Condition(Separate fitting) v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats15.tstat);
 fprintf('p-value: %.4f\n', p15);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci15(1), ci15(2));
 fprintf("\n");
-fprintf('______________Condition(Seperate fitting) a t-test_______________\n');
+fprintf('______________Condition(Separate fitting) a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats16.tstat);
 fprintf('p-value: %.4f\n', p16);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci16(1), ci16(2));
 fprintf("\n");
-fprintf('______________Condition(Seperate fitting) z t-test_______________\n');
+fprintf('______________Condition(Separate fitting) z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats17.tstat);
 fprintf('p-value: %.4f\n', p17);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci17(1), ci17(2));
 fprintf("\n");
-fprintf('_____________Condition(Seperate fitting) Ter t-test______________\n');
+fprintf('_____________Condition(Separate fitting) Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats18.tstat);
 fprintf('p-value: %.4f\n', p18);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci18(1), ci18(2));
 fprintf("\n");
-fprintf('_____________Condition(Seperate fitting) sz t-test_______________\n');
+fprintf('_____________Condition(Separate fitting) sz t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats19.tstat);
 fprintf('p-value: %.4f\n', p19);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci19(1), ci19(2));
 fprintf("\n");
-fprintf('_____________Condition(Seperate fitting) st t-test_______________\n');
+fprintf('_____________Condition(Separate fitting) st t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats20.tstat);
 fprintf('p-value: %.4f\n', p20);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci20(1), ci20(2));
 fprintf("\n");
-fprintf('_____________Condition(Seperate fitting) eta t-test______________\n');
+fprintf('_____________Condition(Separate fitting) eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats21.tstat);
 fprintf('p-value: %.4f\n', p21);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci21(1), ci21(2));
@@ -444,38 +493,38 @@ fprintf("\n");
 % eta parameter
 [h28, p28, ci28, stats28] = ttest2(etaNoAnxG2_Sep_101,etaAnxG2_Sep_101); 
 
-fprintf('')
-fprintf('______________101 Anx & Non Anx(Seperate fitting) v t-test_______________\n');
+fprintf('Compare between group 101 anx and Non anx\n')
+fprintf('______________101 Anx & Non Anx(Separate fitting) v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats22.tstat);
 fprintf('p-value: %.4f\n', p22);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci22(1), ci22(2));
 fprintf("\n");
-fprintf('______________101 Anx & Non Anx(Seperate fitting) a t-test_______________\n');
+fprintf('______________101 Anx & Non Anx(Separate fitting) a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats23.tstat);
 fprintf('p-value: %.4f\n', p23);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci23(1), ci23(2));
 fprintf("\n");
-fprintf('______________101 Anx & Non Anx(Seperate fitting) z t-test_______________\n');
+fprintf('______________101 Anx & Non Anx(Separate fitting) z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats24.tstat);
 fprintf('p-value: %.4f\n', p24);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci24(1), ci24(2));
 fprintf("\n");
-fprintf('_____________101 Anx & Non Anx(Seperate fitting) Ter t-test______________\n');
+fprintf('_____________101 Anx & Non Anx(Separate fitting) Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats25.tstat);
 fprintf('p-value: %.4f\n', p25);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci25(1), ci25(2));
 fprintf("\n");
-fprintf('_____________101 Anx & Non Anx(Seperate fitting) sz t-test_______________\n');
+fprintf('_____________101 Anx & Non Anx(Separate fitting) sz t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats26.tstat);
 fprintf('p-value: %.4f\n', p26);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci26(1), ci26(2));
 fprintf("\n");
-fprintf('_____________101 Anx & Non Anx(Seperate fitting) st t-test_______________\n');
+fprintf('_____________101 Anx & Non Anx(Separate fitting) st t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats27.tstat);
 fprintf('p-value: %.4f\n', p27);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci27(1), ci27(2));
 fprintf("\n");
-fprintf('_____________101 Anx & Non Anx(Seperate fitting) eta t-test______________\n');
+fprintf('_____________101 Anx & Non Anx(Separate fitting) eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats28.tstat);
 fprintf('p-value: %.4f\n', p28);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci28(1), ci28(2));
@@ -505,45 +554,45 @@ fprintf("\n");
 % eta parameter
 [h35, p35, ci35, stats35] = ttest2(etaNoAnxG2_Sep_102,etaAnxG2_Sep_102); 
 
-fprintf('')
-fprintf('______________102 Anx & Non Anx(Seperate fitting) v t-test_______________\n');
+fprintf('Compare between group 102 anx and Non anx\n')
+fprintf('______________102 Anx & Non Anx(Separate fitting) v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats29.tstat);
 fprintf('p-value: %.4f\n', p29);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci29(1), ci29(2));
 fprintf("\n");
-fprintf('______________102 Anx & Non Anx(Seperate fitting) a t-test_______________\n');
+fprintf('______________102 Anx & Non Anx(Separate fitting) a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats30.tstat);
 fprintf('p-value: %.4f\n', p30);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci30(1), ci30(2));
 fprintf("\n");
-fprintf('______________102 Anx & Non Anx(Seperate fitting) z t-test_______________\n');
+fprintf('______________102 Anx & Non Anx(Separate fitting) z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats31.tstat);
 fprintf('p-value: %.4f\n', p31);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci31(1), ci31(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) Ter t-test______________\n');
+fprintf('_____________102 Anx & Non Anx(Separate fitting) Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats32.tstat);
 fprintf('p-value: %.4f\n', p32);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci32(1), ci32(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) sz t-test_______________\n');
+fprintf('_____________102 Anx & Non Anx(Separate fitting) sz t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats33.tstat);
 fprintf('p-value: %.4f\n', p33);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci33(1), ci33(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) st t-test_______________\n');
+fprintf('_____________102 Anx & Non Anx(Separate fitting) st t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats34.tstat);
 fprintf('p-value: %.4f\n', p34);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci27(1), ci27(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) eta t-test______________\n');
+fprintf('_____________102 Anx & Non Anx(Separate fitting) eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats35.tstat);
 fprintf('p-value: %.4f\n', p35);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci35(1), ci35(2));
 fprintf("\n");
 
 
-%% Compare between group 102 and 102 anx
+%% Compare between group 101 and 102 anx
 
 % T test setup 
 % v parameter
@@ -567,38 +616,38 @@ fprintf("\n");
 % eta parameter
 [h42, p42, ci42, stats42] = ttest2(etaAnxG2_Sep_101,etaAnxG2_Sep_102); 
 
-fprintf('')
-fprintf('______________102 Anx & Non Anx(Seperate fitting) v t-test_______________\n');
+fprintf('Compare between group 101 and 102 anx\n')
+fprintf('______________101 and 102 anx(Separate fitting) v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats36.tstat);
 fprintf('p-value: %.4f\n', p36);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci36(1), ci36(2));
 fprintf("\n");
-fprintf('______________102 Anx & Non Anx(Seperate fitting) a t-test_______________\n');
+fprintf('______________101 and 102 anx(Separate fitting) a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats37.tstat);
 fprintf('p-value: %.4f\n', p37);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci37(1), ci37(2));
 fprintf("\n");
-fprintf('______________102 Anx & Non Anx(Seperate fitting) z t-test_______________\n');
+fprintf('______________101 and 102 anx(Separate fitting) z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats38.tstat);
 fprintf('p-value: %.4f\n', p38);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci38(1), ci38(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) Ter t-test______________\n');
+fprintf('_____________101 and 102 anx(Separate fitting) Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats39.tstat);
 fprintf('p-value: %.4f\n', p39);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci39(1), ci39(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) sz t-test_______________\n');
+fprintf('_____________101 and 102 anx(Separate fitting) sz t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats40.tstat);
 fprintf('p-value: %.4f\n', p40);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci40(1), ci40(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) st t-test_______________\n');
+fprintf('_____________101 and 102 anx(Separate fitting) st t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats41.tstat);
 fprintf('p-value: %.4f\n', p41);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci41(1), ci41(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) eta t-test______________\n');
+fprintf('_____________101 and 102 anx(Separate fitting) eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats42.tstat);
 fprintf('p-value: %.4f\n', p42);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci42(1), ci42(2));
@@ -628,38 +677,38 @@ fprintf("\n");
 % eta parameter
 [h49, p49, ci49, stats49] = ttest2(etaNoAnxG2_Sep_101,etaNoAnxG2_Sep_102); 
 
-fprintf('')
-fprintf('______________102 Anx & Non Anx(Seperate fitting) v t-test_______________\n');
+fprintf('Compare between group 101 and 102 Non anx\n')
+fprintf('______________101 and 102 Non anx(Separate fitting) v t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats43.tstat);
 fprintf('p-value: %.4f\n', p43);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci43(1), ci43(2));
 fprintf("\n");
-fprintf('______________102 Anx & Non Anx(Seperate fitting) a t-test_______________\n');
+fprintf('______________101 and 102 Non anx(Separate fitting) a t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats44.tstat);
 fprintf('p-value: %.4f\n', p44);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci44(1), ci44(2));
 fprintf("\n");
-fprintf('______________102 Anx & Non Anx(Seperate fitting) z t-test_______________\n');
+fprintf('______________101 and 102 Non anx(Separate fitting) z t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats45.tstat);
 fprintf('p-value: %.4f\n', p45);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci45(1), ci45(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) Ter t-test______________\n');
+fprintf('_____________101 and 102 Non anx(Separate fitting) Ter t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats46.tstat);
 fprintf('p-value: %.4f\n', p46);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci46(1), ci46(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) sz t-test_______________\n');
+fprintf('_____________101 and 102 Non anx(Separate fitting) sz t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats47.tstat);
 fprintf('p-value: %.4f\n', p47);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci47(1), ci47(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) st t-test_______________\n');
+fprintf('_____________101 and 102 Non anx(Separate fitting) st t-test_______________\n');
 fprintf('t-statistic: %.4f\n', stats48.tstat);
 fprintf('p-value: %.4f\n', p48);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci48(1), ci48(2));
 fprintf("\n");
-fprintf('_____________102 Anx & Non Anx(Seperate fitting) eta t-test______________\n');
+fprintf('_____________101 and 102 Non anx(Separate fitting) eta t-test______________\n');
 fprintf('t-statistic: %.4f\n', stats49.tstat);
 fprintf('p-value: %.4f\n', p49);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci49(1), ci49(2));

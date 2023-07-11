@@ -236,104 +236,121 @@ fprintf(file5, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v
   
     
     % fit the model
-     output = multiestv4(data_rtTemp, opts2(5));
-     filename = strrep(files(i).name, '.csv', '');
-     fprintf(file1, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', filename, output.Minimum(1,:),output.Minimum(2,:));
-     fprintf(file2, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', filename, output.Minimum(1,:),output.Minimum(2,:));
-     fprintf(file3, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', filename, output.Minimum(1,:),output.Minimum(2,:));
-     fprintf(file4, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', filename, output.Minimum(1,:),output.Minimum(2,:));
-     fprintf(file5, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', filename, output.Minimum(1,:),output.Minimum(2,:));
+     output = multiestv4(data_rtTemp, opts2);
      %qtable - shows model fitting scores
      qtable(output);
+     result1 = output(1).FitInfo;
+     result2 = output(2).FitInfo;
+     result3 = output(3).FitInfo;
+     result4 = output(4).FitInfo;
+     result5 = output(5).FitInfo;
+     % write to file
+     filename = strrep(files(i).name, '.csv', '');
+     fprintf(file1, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
+         filename, output(1).Minimum(1,:),output(1).Minimum(2,:),result1.AICc,result1.BIC,result1.ChiSquare,output(1).Df);
+     fprintf(file2, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
+         filename, output(2).Minimum(1,:),output(2).Minimum(2,:),result2.AICc,result2.BIC,result2.ChiSquare,output(2).Df);
+     fprintf(file3, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
+         filename, output(3).Minimum(1,:),output(3).Minimum(2,:),result3.AICc,result3.BIC,result3.ChiSquare,output(3).Df);
+     fprintf(file4, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
+         filename, output(4).Minimum(1,:),output(4).Minimum(2,:),result4.AICc,result4.BIC,result4.ChiSquare,output(4).Df);
+     fprintf(file5, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
+         filename, output(5).Minimum(1,:),output(5).Minimum(2,:),result5.AICc,result5.BIC,result5.ChiSquare,output(5).Df);
+     
  end
+
+
+
+
+
 
  %% Testing seperating trial types
- 
-file1 = fopen(filePathConR1_101, 'w');
-file2 = fopen(filePathConR2_101, 'w');
-file3 = fopen(filePathConR3_101, 'w');
-file4 = fopen(filePathConR4_101, 'w');
-file5 = fopen(filePathConR5_101, 'w');
-file6 = fopen(filePathConR1_102, 'w');
-file7 = fopen(filePathConR2_102, 'w');
-file8 = fopen(filePathConR3_102, 'w');
-file9 = fopen(filePathConR4_102, 'w');
-file10 = fopen(filePathConR5_102, 'w');
-
-
-% Write the header line to the file
-% Parameter set  = [a Ter eta z sz st v (pi) (gamma)]
-fprintf(file1, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file2, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file3, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file4, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file5, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file6, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file7, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file8, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file9, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-fprintf(file10, 'participantsID,a,Ter,eta,z,sz,st,v\n');
-
-
- for i = 1:numel(files)
-     % create the data matrix [conditions, response, rt in seconds]
-     %reduce the dimension from 1*148*3 to 148*3
-     data_rtTemp = allParticipants101(i,:,:);
-     data_rtTemp = squeeze(data_rtTemp);
-
-     % Model 1 single condition (all 1s for each trial)
-     data_rtTemp(:,1) = ones(size(data_rtTemp,1),1);
-
-     %'3' check for rt, '2' as the row dimension 
-     nanRows = any(isnan(data_rtTemp(:, 3)), 2);
-     % Delete rows with NaN values
-     data_rtTemp(nanRows, :) = [];
-
-     % Debugger: check for looping issue
-     disp('101')
-     disp(i)
-  
-    % fit the model
-     output = multiestv4(data_rtTemp, opts);
-     filename = strrep(files(i).name, '.csv', '');
-     fprintf(file1, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(1).Minimum);
-     fprintf(file2, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(2).Minimum);
-     fprintf(file3, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(3).Minimum);
-     fprintf(file4, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(4).Minimum);
-     fprintf(file5, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(5).Minimum);
-     %qtable - shows model fitting scores
-     qtable(output);
- end
-
- for i = 1:numel(files)
-     % create the data matrix [conditions, response, rt in seconds]
-     %reduce the dimension from 1*148*3 to 148*3
-     data_rtTemp = allParticipants102(i,:,:);
-     data_rtTemp = squeeze(data_rtTemp);
- 
-     % Model 1 single condition (all 1s for each trial)
-     data_rtTemp(:,1) = ones(size(data_rtTemp,1),1);
- 
-     %'3' check for rt, '2' as the row dimension 
-     nanRows = any(isnan(data_rtTemp(:, 3)), 2);
-     % Delete rows with NaN values
-     data_rtTemp(nanRows, :) = [];
- 
-     % Debugger: check for looping issue
-     disp('102')
-     disp(i)
- 
-    % fit the model
-     output = multiestv4(data_rtTemp, opts);
-     filename = strrep(files(i).name, '.csv', '');
-     fprintf(file6, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(1).Minimum);
-     fprintf(file7, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(2).Minimum);
-     fprintf(file8, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(3).Minimum);
-     fprintf(file9, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(4).Minimum);
-     fprintf(file10, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(5).Minimum);
-     %qtable - shows model fitting scores
-     qtable(output);
- end
+% 
+% file1 = fopen(filePathConR1_101, 'w');
+% file2 = fopen(filePathConR2_101, 'w');
+% file3 = fopen(filePathConR3_101, 'w');
+% file4 = fopen(filePathConR4_101, 'w');
+% file5 = fopen(filePathConR5_101, 'w');
+% file6 = fopen(filePathConR1_102, 'w');
+% file7 = fopen(filePathConR2_102, 'w');
+% file8 = fopen(filePathConR3_102, 'w');
+% file9 = fopen(filePathConR4_102, 'w');
+% file10 = fopen(filePathConR5_102, 'w');
+% 
+% 
+% % Write the header line to the file
+% % Parameter set  = [a Ter eta z sz st v (pi) (gamma)]
+% fprintf(file1, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file2, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file3, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file4, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file5, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file6, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file7, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file8, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file9, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% fprintf(file10, 'participantsID,a,Ter,eta,z,sz,st,v\n');
+% 
+% 
+%  for i = 1:numel(files)
+%      % create the data matrix [conditions, response, rt in seconds]
+%      %reduce the dimension from 1*148*3 to 148*3
+%      data_rtTemp = allParticipants101(i,:,:);
+%      data_rtTemp = squeeze(data_rtTemp);
+% 
+%      % Model 1 single condition (all 1s for each trial)
+%      data_rtTemp(:,1) = ones(size(data_rtTemp,1),1);
+% 
+%      %'3' check for rt, '2' as the row dimension 
+%      nanRows = any(isnan(data_rtTemp(:, 3)), 2);
+%      % Delete rows with NaN values
+%      data_rtTemp(nanRows, :) = [];
+% 
+%      % Debugger: check for looping issue
+%      disp('101')
+%      disp(i)
+% 
+%     % fit the model
+%      output = multiestv4(data_rtTemp, opts);
+%      filename = strrep(files(i).name, '.csv', '');
+%      fprintf(file1, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(1).Minimum);
+%      fprintf(file2, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(2).Minimum);
+%      fprintf(file3, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(3).Minimum);
+%      fprintf(file4, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(4).Minimum);
+%      fprintf(file5, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(5).Minimum);
+%      %qtable - shows model fitting scores
+%      qtable(output);
+%  end
+% 
+%  for i = 1:numel(files)
+%      % create the data matrix [conditions, response, rt in seconds]
+%      %reduce the dimension from 1*148*3 to 148*3
+%      data_rtTemp = allParticipants102(i,:,:);
+%      data_rtTemp = squeeze(data_rtTemp);
+% 
+%      % Model 1 single condition (all 1s for each trial)
+%      data_rtTemp(:,1) = ones(size(data_rtTemp,1),1);
+% 
+%      %'3' check for rt, '2' as the row dimension 
+%      nanRows = any(isnan(data_rtTemp(:, 3)), 2);
+%      % Delete rows with NaN values
+%      data_rtTemp(nanRows, :) = [];
+% 
+%      % Debugger: check for looping issue
+%      disp('102')
+%      disp(i)
+% 
+%     % fit the model
+%      output = multiestv4(data_rtTemp, opts);
+%      filename = strrep(files(i).name, '.csv', '');
+%      fprintf(file6, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(1).Minimum);
+%      fprintf(file7, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(2).Minimum);
+%      fprintf(file8, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(3).Minimum);
+%      fprintf(file9, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(4).Minimum);
+%      fprintf(file10, '%s,%d,%d,%d,%d,%d,%d,%d\n', filename, output(5).Minimum);
+%      %qtable - shows model fitting scores
+%      qtable(output);
+%  end
 
 
 

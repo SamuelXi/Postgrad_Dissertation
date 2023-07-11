@@ -236,7 +236,7 @@ fprintf(file5, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v
   
     
     % fit the model
-     output = multiestv4(data_rtTemp, opts2(5));
+     output = multiestv4(data_rtTemp, opts2);
      %qtable - shows model fitting scores
      qtable(output);
      result1 = output(1).FitInfo;
@@ -247,15 +247,15 @@ fprintf(file5, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v
      % write to file
      filename = strrep(files(i).name, '.csv', '');
      fprintf(file1, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
-         filename, output.Minimum(1,:),output.Minimum(2,:),result1.AICc,result1.BIC,result1.ChiSquare,output(1).Df);
+         filename, output(1).Minimum(1,:),output(1).Minimum(2,:),result1.AICc,result1.BIC,result1.ChiSquare,output(1).Df);
      fprintf(file2, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
-         filename, output.Minimum(1,:),output.Minimum(2,:),result2.AICc,result2.BIC,result2.ChiSquare,output(2).Df);
+         filename, output(2).Minimum(1,:),output(2).Minimum(2,:),result2.AICc,result2.BIC,result2.ChiSquare,output(2).Df);
      fprintf(file3, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
-         filename, output.Minimum(1,:),output.Minimum(2,:),result3.AICc,result3.BIC,result3.ChiSquare,output(3).Df);
+         filename, output(3).Minimum(1,:),output(3).Minimum(2,:),result3.AICc,result3.BIC,result3.ChiSquare,output(3).Df);
      fprintf(file4, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
-         filename, output.Minimum(1,:),output.Minimum(2,:),result4.AICc,result4.BIC,result4.ChiSquare,output(4).Df);
+         filename, output(4).Minimum(1,:),output(4).Minimum(2,:),result4.AICc,result4.BIC,result4.ChiSquare,output(4).Df);
      fprintf(file5, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
-         filename, output.Minimum(1,:),output.Minimum(2,:),result5.AICc,result5.BIC,result5.ChiSquare,output(5).Df);
+         filename, output(5).Minimum(1,:),output(5).Minimum(2,:),result5.AICc,result5.BIC,result5.ChiSquare,output(5).Df);
      
  end
 
@@ -263,7 +263,7 @@ fprintf(file5, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v
 
 
 
- 
+
  %% Testing seperating trial types
 % 
 % file1 = fopen(filePathConR1_101, 'w');
