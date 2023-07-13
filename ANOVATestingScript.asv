@@ -14,31 +14,39 @@ con5 = readtable(filePathConR5);
 
 %% Compare and select winning model
 % For one Condition
-noConSumAICc1 = sum(noCon1.AICc(1));
-noConSumAICc2 = sum(noCon2.AICc(2));
-noConSumAICc3 = sum(noCon3.AICc(3));
-noConSumAICc4 = sum(noCon4.AICc(4));
-noConSumAICc5 = sum(noCon5.AICc(5));
+noCon1.AICc_1_
+noConSumAICc1 = sum(noCon1.AICc_1_);
+noConSumAICc2 = sum(noCon2.AICc_2_);
+noConSumAICc3 = sum(noCon3.AICc_3_);
+noConSumAICc4 = sum(noCon4.AICc_4_);
+noConSumAICc5 = sum(noCon5.AICc_5_);
 
-noConSumBIC1 = sum(noCon1.BIC(1));
-noConSumBIC2 = sum(noCon2.BIC(2));
-noConSumBIC3 = sum(noCon3.BIC(3));
-noConSumBIC4 = sum(noCon4.BIC(4));
-noConSumBIC5 = sum(noCon5.BIC(5));
+noConSumBIC1 = sum(noCon1.BIC_1_);
+noConSumBIC2 = sum(noCon2.BIC_2_);
+noConSumBIC3 = sum(noCon3.BIC_3_);
+noConSumBIC4 = sum(noCon4.BIC_4_);
+noConSumBIC5 = sum(noCon5.BIC_5_);
 
-ConSumAICc1 = sum(con1.AICc(1));
-ConSumAICc2 = sum(con2.AICc(2));
-ConSumAICc3 = sum(con3.AICc(3));
-ConSumAICc4 = sum(con4.AICc(4));
-ConSumAICc5 = sum(con5.AICc(5));
+ConSumAICc1 = sum(con1.AICc_1_);
+ConSumAICc2 = sum(con2.AICc_2_);
+ConSumAICc3 = sum(con3.AICc_3_);
+ConSumAICc4 = sum(con4.AICc_4_);
+ConSumAICc5 = sum(con5.AICc_5_);
 
-ConSumBIC1 = sum(con1.BIC(1));
-ConSumBIC2 = sum(con2.BIC(2));
-ConSumBIC3 = sum(con3.BIC(3));
-ConSumBIC4 = sum(con4.BIC(4));
-ConSumBIC5 = sum(con5.BIC(5));
+ConSumBIC1 = sum(con1.BIC_1_);
+ConSumBIC2 = sum(con2.BIC_2_);
+ConSumBIC3 = sum(con3.BIC_3_);
+ConSumBIC4 = sum(con4.BIC_4_);
+ConSumBIC5 = sum(con5.BIC_5_);
 
+noConAICc1Result = [noConSumAICc1,noConSumAICc2,noConSumAICc3,noConSumAICc4,noConSumAICc5]
+noConBIC1Result = [noConSumBIC1,noConSumBIC2,noConSumBIC3,noConSumBIC4,noConSumBIC5]
+ConSumAICcResult = [ConSumAICc1,ConSumAICc2,ConSumAICc3,ConSumAICc4,ConSumAICc5]
+ConSumBICResult = [ConSumBIC1,ConSumBIC2,ConSumBIC3,ConSumBIC4,ConSumBIC5]
 
+% for one condition, the model 5 is the best
+% for two conditions, could be model 3 or model 5
+% Selecting model 5 for the two conditions in this case
 
 %% Parameters setup
 % No condition group
@@ -120,13 +128,13 @@ sz_Sep_102 = [];
 st_Sep_102 = [];
 eta_Sep_102 = [];
 
-v_Sep_101 = ConSep5_101(:,:).v;
-a_Sep_101 = ConSep5_101(:,:).a;
-z_Sep_101 = ConSep5_101(:,:).z;
-Ter_Sep_101 = ConSep5_101(:,:).Ter;
-sz_Sep_101 = ConSep5_101(:,:).sz;
-st_Sep_101 = ConSep5_101(:,:).st;
-eta_Sep_101 = ConSep5_101(:,:).eta;
+v_Sep_101 = con5.v_101_;
+a_Sep_101 = con5.a_101_;
+z_Sep_101 = con5.z_101_;
+Ter_Sep_101 = con5.Ter_101_;
+sz_Sep_101 = con5.sz_101_;
+st_Sep_101 = con5.st_101_;
+eta_Sep_101 = con5;
 v_Sep_102 = ConSep5_102(:,:).v;
 a_Sep_102 = ConSep5_102(:,:).a;
 z_Sep_102 = ConSep5_102(:,:).z;
@@ -143,7 +151,7 @@ eta_Sep_102 = ConSep5_102(:,:).eta;
 
 % Extract participant information
 for i = 1:115
-    % No condition
+    % One condition
     if ismember(noCon5(i,:).participantsID, anxNoPar)
         %Extract v value
         vNoAnxG1 = [vNoAnxG1,noCon5(i,:).v];
@@ -177,106 +185,107 @@ for i = 1:115
         etaAnxG1 = [etaAnxG1,noCon5(i,:).eta];
     end
     
-    %Condtion
+    % Two Condtion
+    % % condition 101
+    % if ismember(con5(i,:).participantsID, anxNoPar)
+    %     %Extract v value
+    %     vNoAnxG2 = [vNoAnxG2,con5(i,:).v_101_];
+    %     %Extract a value
+    %     aNoAnxG2 = [aNoAnxG2,con5(i,:).a_101_];
+    %     %Extract z value
+    %     zNoAnxG2 = [zNoAnxG2,con5(i,:).z_101_];
+    %     %Extract Ter value
+    %     TerNoAnxG2 = [TerNoAnxG2,con5(i,:).Ter_101_];
+    %     %Extract sz value
+    %     szNoAnxG2 = [szNoAnxG2,con5(i,:).sz_101_];
+    %     %Extract st value
+    %     stNoAnxG2 = [stNoAnxG2,con5(i,:).st_101_];
+    %     %Extract eta value
+    %     etaNoAnxG2 = [etaNoAnxG2,con5(i,:).eta_101_];
+    % 
+    % elseif ismember(con5(i,:).participantsID, anxPar)
+    %     %Extract v value
+    %     vAnxG2 = [vAnxG2,con5(i,:).v_101_];
+    %     %Extract a value
+    %     aAnxG2 = [aAnxG2,con5(i,:).a_101_];
+    %     %Extract z value
+    %     zAnxG2 = [zAnxG2,con5(i,:).z_101_];
+    %     %Extract Ter value
+    %     TerAnxG2 = [TerAnxG2,con5(i,:).Ter_101_];
+    %     %Extract sz value
+    %     szAnxG2 = [szAnxG2,con5(i,:).sz_101_];
+    %     %Extract st value
+    %     stAnxG2 = [stAnxG2,con5(i,:).st_101_];
+    %     %Extract eta value
+    %     etaAnxG2 = [etaAnxG2,con5(i,:).eta_101_];
+    % end
+
+    %Condtion Separated 101
     if ismember(con5(i,:).participantsID, anxNoPar)
         %Extract v value
-        vNoAnxG2 = [vNoAnxG2,con5(i,:).v_101_];
+        vNoAnxG2_Sep_101 = [vNoAnxG2_Sep_101,con5(i,:).v_101_];
         %Extract a value
-        aNoAnxG2 = [aNoAnxG2,con5(i,:).a_101_];
+        aNoAnxG2_Sep_101 = [aNoAnxG2_Sep_101,con5(i,:).a_101_];
         %Extract z value
-        zNoAnxG2 = [zNoAnxG2,con5(i,:).z_101_];
+        zNoAnxG2_Sep_101 = [zNoAnxG2_Sep_101,con5(i,:).z_101_];
         %Extract Ter value
-        TerNoAnxG2 = [TerNoAnxG2,con5(i,:).Ter_101_];
+        TerNoAnxG2_Sep_101 = [TerNoAnxG2_Sep_101,con5(i,:).Ter_101_];
         %Extract sz value
-        szNoAnxG2 = [szNoAnxG2,con5(i,:).sz_101_];
+        szNoAnxG2_Sep_101 = [szNoAnxG2_Sep_101,con5(i,:).sz_101_];
         %Extract st value
-        stNoAnxG2 = [stNoAnxG2,con5(i,:).st_101_];
+        stNoAnxG2_Sep_101 = [stNoAnxG2_Sep_101,con5(i,:).st_101_];
         %Extract eta value
-        etaNoAnxG2 = [etaNoAnxG2,con5(i,:).eta_101_];
+        etaNoAnxG2_Sep_101 = [etaNoAnxG2_Sep_101,con5(i,:).eta_101_];
 
     elseif ismember(con5(i,:).participantsID, anxPar)
         %Extract v value
-        vAnxG2 = [vAnxG2,con5(i,:).v_101_];
+        vAnxG2_Sep_101 = [vAnxG2_Sep_101,con5(i,:).v_101_];
         %Extract a value
-        aAnxG2 = [aAnxG2,con5(i,:).a_101_];
+        aAnxG2_Sep_101 = [aAnxG2_Sep_101,con5(i,:).a_101_];
         %Extract z value
-        zAnxG2 = [zAnxG2,con5(i,:).z_101_];
+        zAnxG2_Sep_101 = [zAnxG2_Sep_101,con5(i,:).z_101_];
         %Extract Ter value
-        TerAnxG2 = [TerAnxG2,con5(i,:).Ter_101_];
+        TerAnxG2_Sep_101 = [TerAnxG2_Sep_101,con5(i,:).Ter_101_];
         %Extract sz value
-        szAnxG2 = [szAnxG2,con5(i,:).sz_101_];
+        szAnxG2_Sep_101 = [szAnxG2_Sep_101,con5(i,:).sz_101_];
         %Extract st value
-        stAnxG2 = [stAnxG2,con5(i,:).st_101_];
+        stAnxG2_Sep_101 = [stAnxG2_Sep_101,con5(i,:).st_101_];
         %Extract eta value
-        etaAnxG2 = [etaAnxG2,con5(i,:).eta_101_];
-    end
-
-    %Condtion Separated 101
-    if ismember(ConSep5_101(i,:).participantsID, anxNoPar)
-        %Extract v value
-        vNoAnxG2_Sep_101 = [vNoAnxG2_Sep_101,ConSep5_101(i,:).v];
-        %Extract a value
-        aNoAnxG2_Sep_101 = [aNoAnxG2_Sep_101,ConSep5_101(i,:).a];
-        %Extract z value
-        zNoAnxG2_Sep_101 = [zNoAnxG2_Sep_101,ConSep5_101(i,:).z];
-        %Extract Ter value
-        TerNoAnxG2_Sep_101 = [TerNoAnxG2_Sep_101,ConSep5_101(i,:).Ter];
-        %Extract sz value
-        szNoAnxG2_Sep_101 = [szNoAnxG2_Sep_101,ConSep5_101(i,:).sz];
-        %Extract st value
-        stNoAnxG2_Sep_101 = [stNoAnxG2_Sep_101,ConSep5_101(i,:).st];
-        %Extract eta value
-        etaNoAnxG2_Sep_101 = [etaNoAnxG2_Sep_101,ConSep5_101(i,:).eta];
-
-    elseif ismember(ConSep5_101(i,:).participantsID, anxPar)
-        %Extract v value
-        vAnxG2_Sep_101 = [vAnxG2_Sep_101,ConSep5_101(i,:).v];
-        %Extract a value
-        aAnxG2_Sep_101 = [aAnxG2_Sep_101,ConSep5_101(i,:).a];
-        %Extract z value
-        zAnxG2_Sep_101 = [zAnxG2_Sep_101,ConSep5_101(i,:).z];
-        %Extract Ter value
-        TerAnxG2_Sep_101 = [TerAnxG2_Sep_101,ConSep5_101(i,:).Ter];
-        %Extract sz value
-        szAnxG2_Sep_101 = [szAnxG2_Sep_101,ConSep5_101(i,:).sz];
-        %Extract st value
-        stAnxG2_Sep_101 = [stAnxG2_Sep_101,ConSep5_101(i,:).st];
-        %Extract eta value
-        etaAnxG2_Sep_101 = [etaAnxG2_Sep_101,ConSep5_101(i,:).eta];
+        etaAnxG2_Sep_101 = [etaAnxG2_Sep_101,con5(i,:).eta_101_];
     end
 
     %Condtion Separated 102
-    if ismember(ConSep5_102(i,:).participantsID, anxNoPar)
+    if ismember(con5(i,:).participantsID, anxNoPar)
         %Extract v value
-        vNoAnxG2_Sep_102 = [vNoAnxG2_Sep_102,ConSep5_102(i,:).v];
+        vNoAnxG2_Sep_102 = [vNoAnxG2_Sep_102,con5(i,:).v_102_];
         %Extract a value
-        aNoAnxG2_Sep_102 = [aNoAnxG2_Sep_102,ConSep5_102(i,:).a];
+        aNoAnxG2_Sep_102 = [aNoAnxG2_Sep_102,con5(i,:).a_102_];
         %Extract z value
-        zNoAnxG2_Sep_102 = [zNoAnxG2_Sep_102,ConSep5_102(i,:).z];
+        zNoAnxG2_Sep_102 = [zNoAnxG2_Sep_102,con5(i,:).z_102_];
         %Extract Ter value
-        TerNoAnxG2_Sep_102 = [TerNoAnxG2_Sep_102,ConSep5_102(i,:).Ter];
+        TerNoAnxG2_Sep_102 = [TerNoAnxG2_Sep_102,con5(i,:).Ter_102_];
         %Extract sz value
-        szNoAnxG2_Sep_102 = [szNoAnxG2_Sep_102,ConSep5_102(i,:).sz];
+        szNoAnxG2_Sep_102 = [szNoAnxG2_Sep_102,con5(i,:).sz_102_];
         %Extract st value
-        stNoAnxG2_Sep_102 = [stNoAnxG2_Sep_102,ConSep5_102(i,:).st];
+        stNoAnxG2_Sep_102 = [stNoAnxG2_Sep_102,con5(i,:).st_102_];
         %Extract eta value
-        etaNoAnxG2_Sep_102 = [etaNoAnxG2_Sep_102,ConSep5_102(i,:).eta];
+        etaNoAnxG2_Sep_102 = [etaNoAnxG2_Sep_102,con5(i,:).eta_102_];
 
     elseif ismember(ConSep5_102(i,:).participantsID, anxPar)
         %Extract v value
-        vAnxG2_Sep_102 = [vAnxG2_Sep_102,ConSep5_102(i,:).v];
+        vAnxG2_Sep_102 = [vAnxG2_Sep_102,con5(i,:).v_102_];
         %Extract a value
-        aAnxG2_Sep_102 = [aAnxG2_Sep_102,ConSep5_102(i,:).a];
+        aAnxG2_Sep_102 = [aAnxG2_Sep_102,con5(i,:).a_102_];
         %Extract z value
-        zAnxG2_Sep_102 = [zAnxG2_Sep_102,ConSep5_102(i,:).z];
+        zAnxG2_Sep_102 = [zAnxG2_Sep_102,con5(i,:).z_102_];
         %Extract Ter value
-        TerAnxG2_Sep_102 = [TerAnxG2_Sep_102,ConSep5_102(i,:).Ter];
+        TerAnxG2_Sep_102 = [TerAnxG2_Sep_102,con5(i,:).Ter_102_];
         %Extract sz value
-        szAnxG2_Sep_102 = [szAnxG2_Sep_102,ConSep5_102(i,:).sz];
+        szAnxG2_Sep_102 = [szAnxG2_Sep_102,con5(i,:).sz_102_];
         %Extract st value
-        stAnxG2_Sep_102 = [stAnxG2_Sep_102,ConSep5_102(i,:).st];
+        stAnxG2_Sep_102 = [stAnxG2_Sep_102,con5(i,:).st_102_];
         %Extract eta value
-        etaAnxG2_Sep_102 = [etaAnxG2_Sep_102,ConSep5_102(i,:).eta];
+        etaAnxG2_Sep_102 = [etaAnxG2_Sep_102,con5(i,:).eta_102_];
     end
 
 end
@@ -285,19 +294,19 @@ end
 %% T-test（One condition)
 
 % v parameter
-[h1, p1, ci1, stats1] = ttest2(vNoAnxG1,vAnxG1); %no Condition
+[h1, p1, ci1, stats1] = ttest2(vNoAnxG1,vAnxG1);
 % a parameter
-[h3, p3, ci3, stats3] = ttest2(aNoAnxG1,aAnxG1); %no Condition
+[h3, p3, ci3, stats3] = ttest2(aNoAnxG1,aAnxG1);
 % z parameter
-[h5, p5, ci5, stats5] = ttest2(zNoAnxG1,zAnxG1); %no Condition
+[h5, p5, ci5, stats5] = ttest2(zNoAnxG1,zAnxG1);
 % Ter parameter
-[h7, p7, ci7, stats7] = ttest2(TerNoAnxG1,TerAnxG1); %no Condition
+[h7, p7, ci7, stats7] = ttest2(TerNoAnxG1,TerAnxG1);
 % sz parameter
-[h9, p9, ci9, stats9] = ttest2(szNoAnxG1,szAnxG1); %no Condition
+[h9, p9, ci9, stats9] = ttest2(szNoAnxG1,szAnxG1); 
 % st parameter
-[h11, p11, ci11, stats11] = ttest2(stNoAnxG1,stAnxG1); %no Condition
+[h11, p11, ci11, stats11] = ttest2(stNoAnxG1,stAnxG1);
 % eta parameter
-[h13, p13, ci13, stats13] = ttest2(etaNoAnxG1,etaAnxG1); %no Condition
+[h13, p13, ci13, stats13] = ttest2(etaNoAnxG1,etaAnxG1);
 
 fprintf('_____________One Condition v t-test_____________\n');
 fprintf('t-statistic: %.4f\n', stats1.tstat);
@@ -341,7 +350,7 @@ fprintf('p-value: %.4f\n', p13);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci13(1), ci13(2));
 fprintf('\n')
 %% Two conditioned
-% 101 vs 102 (No seperatio
+% 101 vs 102 (compare with anx and non anx
 % v parameter
 [h2, p2, ci2, stats2] = ttest2(vNoAnxG2,vAnxG2); %Condition
 
