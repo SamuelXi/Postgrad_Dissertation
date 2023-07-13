@@ -1,0 +1,57 @@
+%% Parameter Recovery for two condition
+
+% two condition parameters mean
+aTwoR1 = mean(con5.a_101_);
+terTwoR1 = mean(con5.Ter_101_);
+etaTwoR1 = mean(con5.eta_101_);
+zTwoR1 = mean(con5.z_101_);
+szTwoR1 = mean(con5.sz_101_);
+stTwoR1 = mean(con5.st_101_);
+vTwoR1 = mean(con5.v_101_);
+
+aTwoR2 = mean(con5.a_102_);
+terTwoR2 = mean(con5.Ter_102_);
+etaTwoR2 = mean(con5.eta_102_);
+zTwoR2 = mean(con5.z_102_);
+szTwoR2 = mean(con5.sz_102_);
+stTwoR2 = mean(con5.st_102_);
+vTwoR2 = mean(con5.v_102_);
+
+% Parameter set  =     [a Ter eta z  sz  st  v]
+parameter_set = [aTwoR1 terTwoR1 etaTwoR1 zTwoR1 szTwoR1 stTwoR1 vTwoR1
+                 aTwoR2 terTwoR2 etaTwoR2 zTwoR2 szTwoR2 stTwoR2 vTwoR2]
+
+N = [980,500]; %for 148 trials
+%N = [11270,5750]; %for 148 trials
+seed = 0;
+data = multisimul(parameter_set, N, seed);
+
+%% Run all 5 models (Condition) 
+% Something worng with model 4 when running all models all together, need
+% to run the model one by one for the condition model, changing parameter
+% in output and save file to the corresponding file.
+
+folderPathConR = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/fitting_results/DMAT/Recovery/';
+fileNameConR5 = 'model5(TwoConditionRecovery).csv';
+filePathRecoveryM5 = fullfile(folderPathConR, fileNameConR5);
+file1 = fopen(filePathRecoveryM5, 'w');
+
+
+% Write the header line to the file
+% Parameter set  = [a Ter eta z sz st v (pi) (gamma)]
+fprintf(file1, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v(101),a(102),Ter(102),eta(102),z(102),sz(102),st(102),v(102),AICc(1),BIC(1),Chi(1),df\n');
+
+
+    
+% fit the model
+output = multiestv4(data, opts2(5));
+%qtable - shows model fitting scores
+qtable(output);
+result1 = output.FitInfo;
+% write to file
+filename = strrep(files(i).name, '.csv', '');
+fprintf(file1, '%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n', ...
+filename, output(1).Minimum(1,:),output(1).Minimum(2,:),result1.AICc,result1.BIC,result1.ChiSquare,output(1).Df);
+disp(output.Minimum)
+     
+

@@ -261,9 +261,6 @@ fprintf(file5, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v
 
 
 
-
-
-
  %% Testing seperating trial types
 % 
 % file1 = fopen(filePathConR1_101, 'w');

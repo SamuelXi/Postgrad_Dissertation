@@ -185,41 +185,6 @@ for i = 1:115
         etaAnxG1 = [etaAnxG1,noCon5(i,:).eta];
     end
     
-    % Two Condtion
-    % % condition 101
-    % if ismember(con5(i,:).participantsID, anxNoPar)
-    %     %Extract v value
-    %     vNoAnxG2 = [vNoAnxG2,con5(i,:).v_101_];
-    %     %Extract a value
-    %     aNoAnxG2 = [aNoAnxG2,con5(i,:).a_101_];
-    %     %Extract z value
-    %     zNoAnxG2 = [zNoAnxG2,con5(i,:).z_101_];
-    %     %Extract Ter value
-    %     TerNoAnxG2 = [TerNoAnxG2,con5(i,:).Ter_101_];
-    %     %Extract sz value
-    %     szNoAnxG2 = [szNoAnxG2,con5(i,:).sz_101_];
-    %     %Extract st value
-    %     stNoAnxG2 = [stNoAnxG2,con5(i,:).st_101_];
-    %     %Extract eta value
-    %     etaNoAnxG2 = [etaNoAnxG2,con5(i,:).eta_101_];
-    % 
-    % elseif ismember(con5(i,:).participantsID, anxPar)
-    %     %Extract v value
-    %     vAnxG2 = [vAnxG2,con5(i,:).v_101_];
-    %     %Extract a value
-    %     aAnxG2 = [aAnxG2,con5(i,:).a_101_];
-    %     %Extract z value
-    %     zAnxG2 = [zAnxG2,con5(i,:).z_101_];
-    %     %Extract Ter value
-    %     TerAnxG2 = [TerAnxG2,con5(i,:).Ter_101_];
-    %     %Extract sz value
-    %     szAnxG2 = [szAnxG2,con5(i,:).sz_101_];
-    %     %Extract st value
-    %     stAnxG2 = [stAnxG2,con5(i,:).st_101_];
-    %     %Extract eta value
-    %     etaAnxG2 = [etaAnxG2,con5(i,:).eta_101_];
-    % end
-
     %Condtion Separated 101
     if ismember(con5(i,:).participantsID, anxNoPar)
         %Extract v value
@@ -349,74 +314,6 @@ fprintf('t-statistic: %.4f\n', stats13.tstat);
 fprintf('p-value: %.4f\n', p13);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci13(1), ci13(2));
 fprintf('\n')
-%% Two conditioned
-% 101 vs 102 (compare without seperating the anx and non anx)
-% v parameter
-[h2, p2, ci2, stats2] = ttest2(vNoAnxG2,vAnxG2); %Condition
-
-% a parameter
-[h4, p4, ci4, stats4] = ttest2(aNoAnxG2,aAnxG2); %Condition
-
-% z parameter
-[h6, p6, ci6, stats6] = ttest2(zNoAnxG2,zAnxG2); %Condition
-
-% Ter parameter
-[h8, p8, ci8, stats8] = ttest2(TerNoAnxG2,TerAnxG2); %Condition
-
-% sz parameter
-[h10, p10, ci10, stats10] = ttest2(szNoAnxG2,szAnxG2); %Condition
-
-% st parameter
-[h12, p12, ci12, stats12] = ttest2(stNoAnxG2,stAnxG2); %Condition
-
-% eta parameter
-[h14, p14, ci14, stats14] = ttest2(etaNoAnxG2,etaAnxG2); %Condition
-
-
-
-% Display the results
-
-fprintf('______________Condition v t-test_______________\n');
-fprintf('t-statistic: %.4f\n', stats2.tstat);
-fprintf('p-value: %.4f\n', p2);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci2(1), ci2(2));
-fprintf("\n");
-
-fprintf('______________Condition a t-test_______________\n');
-fprintf('t-statistic: %.4f\n', stats4.tstat);
-fprintf('p-value: %.4f\n', p4);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci4(1), ci4(2));
-fprintf("\n");
-
-fprintf('______________Condition z t-test_______________\n');
-fprintf('t-statistic: %.4f\n', stats6.tstat);
-fprintf('p-value: %.4f\n', p6);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci6(1), ci6(2));
-fprintf("\n");
-
-fprintf('_____________Condition Ter t-test______________\n');
-fprintf('t-statistic: %.4f\n', stats8.tstat);
-fprintf('p-value: %.4f\n', p8);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci8(1), ci8(2));
-fprintf("\n");
-
-fprintf('_____________Condition sz t-test______________\n');
-fprintf('t-statistic: %.4f\n', stats10.tstat);
-fprintf('p-value: %.4f\n', p10);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci10(1), ci10(2));
-fprintf("\n");
-
-fprintf('_____________Condition st t-test______________\n');
-fprintf('t-statistic: %.4f\n', stats12.tstat);
-fprintf('p-value: %.4f\n', p12);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci12(1), ci12(2));
-fprintf("\n");
-
-fprintf('_____________Condition eta t-test______________\n');
-fprintf('t-statistic: %.4f\n', stats14.tstat);
-fprintf('p-value: %.4f\n', p14);
-fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci14(1), ci14(2));
-fprintf("\n");
 
 %% Seperate test
 % Compare 101 and 102 for all value 
@@ -723,8 +620,7 @@ fprintf('p-value: %.4f\n', p49);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci49(1), ci49(2));
 fprintf("\n");
 
-
-
+%% ANOVA Testing
 
 
 
