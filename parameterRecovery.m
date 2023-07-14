@@ -83,3 +83,20 @@ RvTwoR2 = mean(recoveryM5.v_102_);
 parameter_set
 parameter_RecoveryM5 = [RaTwoR1 RterTwoR1 RetaTwoR1 RzTwoR1 RszTwoR1 RstTwoR1 RvTwoR1
                  RaTwoR2 RterTwoR2 RetaTwoR2 RzTwoR2 RszTwoR2 RstTwoR2 RvTwoR2]
+
+%% Correlation test 
+
+parameter_set_101 = [aTwoR1 terTwoR1 etaTwoR1 zTwoR1 szTwoR1 stTwoR1 vTwoR1];
+parameter_RecoveryM5_101 = [RaTwoR1 RterTwoR1 RetaTwoR1 RzTwoR1 RszTwoR1 RstTwoR1 RvTwoR1];
+
+parameter_set_102 = [aTwoR2 terTwoR2 etaTwoR2 zTwoR2 szTwoR2 stTwoR2 vTwoR2];
+parameter_RecoveryM5_102 = [RaTwoR2 RterTwoR2 RetaTwoR2 RzTwoR2 RszTwoR2 RstTwoR2 RvTwoR2];
+
+% Perform correlation test
+corr_matrix = corrcoef(parameter_set_all, parameter_RecoveryM5_all);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['Correlation Coefficient: ', num2str(correlation_coefficient)]);
