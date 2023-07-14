@@ -43,7 +43,7 @@ file1 = fopen(filePathRecoveryM5, 'w');
 % Parameter set  = [a Ter eta z sz st v (pi) (gamma)]
 fprintf(file1, 'participantsID,a(101),Ter(101),eta(101),z(101),sz(101),st(101),v(101),a(102),Ter(102),eta(102),z(102),sz(102),st(102),v(102),AICc(1),BIC(1),Chi(1),df\n');
 
-for i = 1:10
+for i = 1:115
 
     disp(i)
     data = multisimul(parameter_set, N);
@@ -60,7 +60,7 @@ for i = 1:10
 end
     
 
-%%
+%% Calculate mean and compare
 recoveryM5 = readtable(filePathRecoveryM5);
 
 
@@ -81,5 +81,5 @@ RstTwoR2 = mean(recoveryM5.st_102_);
 RvTwoR2 = mean(recoveryM5.v_102_);
 
 parameter_set
-parameter_Recovery = [RaTwoR1 RterTwoR1 RetaTwoR1 RzTwoR1 RszTwoR1 RstTwoR1 RvTwoR1
+parameter_RecoveryM5 = [RaTwoR1 RterTwoR1 RetaTwoR1 RzTwoR1 RszTwoR1 RstTwoR1 RvTwoR1
                  RaTwoR2 RterTwoR2 RetaTwoR2 RzTwoR2 RszTwoR2 RstTwoR2 RvTwoR2]

@@ -236,7 +236,7 @@ for i = 1:115
         %Extract eta value
         etaNoAnxG2_Sep_102 = [etaNoAnxG2_Sep_102,con5(i,:).eta_102_];
 
-    elseif ismember(ConSep5_102(i,:).participantsID, anxPar)
+    elseif ismember(con5(i,:).participantsID, anxPar)
         %Extract v value
         vAnxG2_Sep_102 = [vAnxG2_Sep_102,con5(i,:).v_102_];
         %Extract a value
@@ -622,7 +622,27 @@ fprintf("\n");
 
 %% ANOVA Testing
 
+% Combine data into a single matrix
+data = [aAnxG2_Sep_101', aNoAnxG2_Sep_101'];
 
+% Perform one-way ANOVA
+[p, tbl, stats] = anova1(data);
+
+% Display ANOVA table and p-value
+disp(tbl);
+disp(['p-value: ', num2str(p)]);
+
+%% ANOVA Testing
+
+% Combine data into a single matrix
+data = [aAnxG2_Sep_101', aAnxG2_Sep_101'];
+
+% Perform one-way ANOVA
+[p, tbl, stats] = anova1(data);
+
+% Display ANOVA table and p-value
+disp(tbl);
+disp(['p-value: ', num2str(p)]);
 
 
 
