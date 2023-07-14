@@ -620,29 +620,7 @@ fprintf('p-value: %.4f\n', p49);
 fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci49(1), ci49(2));
 fprintf("\n");
 
-%% ANOVA Testing
 
-% Combine data into a single matrix
-data = [aAnxG2_Sep_101', aNoAnxG2_Sep_101'];
-
-% Perform one-way ANOVA
-[p, tbl, stats] = anova1(data);
-
-% Display ANOVA table and p-value
-disp(tbl);
-disp(['p-value: ', num2str(p)]);
-
-%% ANOVA Testing
-
-% Combine data into a single matrix
-data = [aAnxG2_Sep_101', aAnxG2_Sep_101'];
-
-% Perform one-way ANOVA
-[p, tbl, stats] = anova1(data);
-
-% Display ANOVA table and p-value
-disp(tbl);
-disp(['p-value: ', num2str(p)]);
 
 
 
