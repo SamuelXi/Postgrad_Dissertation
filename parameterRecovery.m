@@ -71,70 +71,226 @@ end
 delete(gcp("nocreate"))
 
 %% Prepare file for correlation test
-con3Recover = readtable(filePathRecoveryM3);
+
+
+% Output file where combined data will be stored
+fileNameConR3 = 'model3(TwoConditionRecovery).csv';
+outputFilePath = fullfile(folderPathConR, fileNameConR3);
+outputFile = fopen(outputFilePath, 'w');
+
+% List all the files in the folder
+filesR = dir(fullfile(folderPathConR, '*.csv'));
+
+fprintf(outputFile, ['participantsID,a(101),Ter(101),eta(101),z(101),sz(101),' ...
+     'st(101),v(101),a(102),Ter(102),eta(102),z(102),sz(102),st(102),v(102),AICc(1),BIC(1),Chi(1),df\n']);
+
+% Loop through each file and append its contents to the output file
+for i = 2:length(filesR)
+    filePath = fullfile(folderPathConR, filesR(i).name);
+    fileContent = fileread(filePath);
+    fprintf(outputFile, '%s', fileContent);
+end
+
+% Close the output file
+fclose(outputFile);
+
+
+%% Append new list for testing
+
+recoverP = readtable(outputFilePath);
+
+index = ismember(con3.participantsID, recoverP.participantsID);
+
+indexList = find(index);
+
+aTwoR1C = [];
+terTwoR1C = [];
+etaTwoR1C = [];
+zTwoR1C = [];
+szTwoR1C = [];
+stTwoR1C = [];
+vTwoR1C = [];
+    
+aTwoR2C = [];
+terTwoR2C = [];
+etaTwoR2C = [];
+zTwoR2C = [];
+szTwoR2C = [];
+stTwoR2C = [];
+vTwoR2C = [];
+
+
+for i = 1:60
+    aTwoR1C = [aTwoR1C, con3.a_101_(indexList(i))];
+    terTwoR1C = [terTwoR1C,con3.Ter_101_(indexList(i))];
+    etaTwoR1C = [etaTwoR1C,con3.eta_101_(indexList(i))];
+    zTwoR1C = [zTwoR1C,con3.z_101_(indexList(i))];
+    szTwoR1C = [szTwoR1C,con3.sz_101_(indexList(i))];
+    stTwoR1C = [stTwoR1C,con3.st_101_(indexList(i))];
+    vTwoR1C = [vTwoR1C,con3.v_101_(indexList(i))];
+    
+    aTwoR2C = [aTwoR2C,con3.a_102_(indexList(i))];
+    terTwoR2C = [terTwoR2C,con3.Ter_102_(indexList(i))];
+    etaTwoR2C = [etaTwoR2C,con3.eta_102_(indexList(i))];
+    zTwoR2C = [zTwoR2C,con3.z_102_(indexList(i))];
+    szTwoR2C = [szTwoR2C,con3.sz_102_(indexList(i))];
+    stTwoR2C = [stTwoR2C,con3.st_102_(indexList(i))];
+    vTwoR2C = [vTwoR2C,con3.v_102_(indexList(i))];
+end
+
+
+
 
 %% Correlation test a 101
 
 % Perform correlation test
-corr_matrix = corrcoef(con3.a_101_, con3Recover.a_101_);
+corr_matrix = corrcoef(aTwoR1C, recoverP.a_101_);
 
 % Extract correlation coefficient
 correlation_coefficient = corr_matrix(1, 2);
 
 % Display correlation coefficient
-disp(['A 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+disp(['a 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
 
 %% Correlation test Ter 101
 
 % Perform correlation test
-corr_matrix = corrcoef(con3.Ter_101_, con3Recover.Ter_101_);
+corr_matrix = corrcoef(terTwoR1C, recoverP.Ter_101_);
 
 % Extract correlation coefficient
 correlation_coefficient = corr_matrix(1, 2);
 
 % Display correlation coefficient
-disp(['Correlation Coefficient: ', num2str(correlation_coefficient)]);
+disp(['Ter 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
 
 %% Correlation test eta 101
 
 % Perform correlation test
-corr_matrix = corrcoef(con3.eta_101_, con3Recover.eta_101_);
+corr_matrix = corrcoef(etaTwoR1C, recoverP.eta_101_);
 
 % Extract correlation coefficient
 correlation_coefficient = corr_matrix(1, 2);
 
 % Display correlation coefficient
-disp(['Correlation Coefficient: ', num2str(correlation_coefficient)]);
+disp(['eta 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
 
 %% Correlation test z 101
 
 % Perform correlation test
-corr_matrix = corrcoef(con3.z_101_, con3Recover.z_101_);
+corr_matrix = corrcoef(zTwoR1C, recoverP.z_101_);
 
 % Extract correlation coefficient
 correlation_coefficient = corr_matrix(1, 2);
 
 % Display correlation coefficient
-disp(['Correlation Coefficient: ', num2str(correlation_coefficient)]);
+disp(['z 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
 
 %% Correlation test sz 101
 
 % Perform correlation test
-corr_matrix = corrcoef(con3.sz_101_, con3Recover.sz_101_);
+corr_matrix = corrcoef(szTwoR1C, recoverP.sz_101_);
 
 % Extract correlation coefficient
 correlation_coefficient = corr_matrix(1, 2);
 
 % Display correlation coefficient
-disp(['Correlation Coefficient: ', num2str(correlation_coefficient)]);
+disp(['sz 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
 
 %% Correlation test st 101
 
 % Perform correlation test
-corr_matrix = corrcoef(con3.st_101_, con3Recover.st_101_);
+corr_matrix = corrcoef(stTwoR1C, recoverP.st_101_);
 
 % Extract correlation coefficient
 correlation_coefficient = corr_matrix(1, 2);
 
 % Display correlation coefficient
-disp(['Correlation Coefficient: ', num2str(correlation_coefficient)]);
+disp(['st 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test v 101
+
+% Perform correlation test
+corr_matrix = corrcoef(vTwoR1C, recoverP.v_101_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['v 101 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test a 102
+
+% Perform correlation test
+corr_matrix = corrcoef(aTwoR2C, recoverP.a_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['a 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test Ter 102
+
+% Perform correlation test
+corr_matrix = corrcoef(terTwoR2C, recoverP.Ter_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['Ter 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test eta 102
+
+% Perform correlation test
+corr_matrix = corrcoef(etaTwoR2C, recoverP.eta_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['eta 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test z 102
+
+% Perform correlation test
+corr_matrix = corrcoef(zTwoR2C, recoverP.z_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['z 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test sz 102
+
+% Perform correlation test
+corr_matrix = corrcoef(szTwoR2C, recoverP.sz_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['sz 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test st 102
+
+% Perform correlation test
+corr_matrix = corrcoef(stTwoR2C, recoverP.st_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['st 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);
+
+%% Correlation test v 102
+
+% Perform correlation test
+corr_matrix = corrcoef(vTwoR2C, recoverP.v_102_);
+
+% Extract correlation coefficient
+correlation_coefficient = corr_matrix(1, 2);
+
+% Display correlation coefficient
+disp(['v 102 Correlation Coefficient: ', num2str(correlation_coefficient)]);

@@ -1,6 +1,4 @@
 %% initialise file name
-
-
 % No condition 
 folderPathNoCon = '/Users/samuelxisun/Desktop/Postgrad_Dissertation/fitting_results/DMAT/NoCondition/';
 fileNameNoConR1 = 'model1(noCondition).csv';
