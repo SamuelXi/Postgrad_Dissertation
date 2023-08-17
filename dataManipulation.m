@@ -62,7 +62,7 @@ for i = 1:numel(files)
     allParticipants(i,:,:) = inputIndData;
     allParticipants101(i,:,:) = inputIndData101;
     allParticipants102(i,:,:) = inputIndData102;
-end
+    end
 
 %% Deal with NaN situation
 %ignoring the function by using omitmissing in mean function
