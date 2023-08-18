@@ -24,5 +24,6 @@ HDDM models are tested using separate Jupyter Notebook files, which are indicate
 ttest.ipynb contained all the scripts for participants' information extraction and t-test.\
 All the results are saved in the path: ./fitting_results folder/HDDM
 
-
+## Other figures
+Other figures in the folder are for dissertation writing
 
