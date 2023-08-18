@@ -6,7 +6,7 @@ DMAT: https://ppw.kuleuven.be/okp/software/dmat/ \
 HDDM: https://hddm.readthedocs.io/en/latest/
 
 ## Data
-There are two Data Folders for different DDM packages. DMAT uses the data folders, and HDDM uses the folder named rt_dataframes.\ 
+There are two Data Folders for different DDM packages. DMAT uses the data folders, and HDDM uses the folder named rt_dataframes.\
 All data are not uploaded to GitHub for ethics and privacy reason.
 
 ## Results
