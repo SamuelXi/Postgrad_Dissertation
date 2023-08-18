@@ -25,5 +25,5 @@ ttest.ipynb contained all the scripts for participants' information extraction a
 All the results are saved in the path: ./fitting_results folder/HDDM
 
 ## Other figures
-Other figures in the folder are for dissertation writing
+Figure folder is for dissertation demonstration
 
